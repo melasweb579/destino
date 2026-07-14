@@ -6,10 +6,10 @@ import { formatPrice } from '@/lib/houses';
 
 export default function HouseDetail({ house }) {
   const stats = [
-    ['Capacity', `${house.capacity} huéspedes`],
-    ['Rooms', `${house.rooms} recámaras`],
-    ['Bathrooms', `${house.bathrooms} baños`],
-    ['Garage', `${house.garage} autos`],
+    ['Capacidad', `${house.capacity} huéspedes`],
+    ['Habitaciones', `${house.rooms} recámaras`],
+    ['Baños', `${house.bathrooms} baños`],
+    ['Garaje', `${house.garage} autos`],
   ];
   return (
     <main style={{ maxWidth: 1100, margin: '0 auto', padding: 'clamp(24px,4vh,44px) clamp(20px,5vw,48px) 0' }}>

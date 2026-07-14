@@ -3,10 +3,10 @@ import { CapacityIcon, RoomsIcon, BathIcon, GarageIcon } from './icons';
 // Capacity / Rooms / Bathrooms / Garage — icon + value + label.
 export default function Stats({ house, variant = 'row' }) {
   const items = [
-    { Icon: CapacityIcon, value: house.capacity, label: 'Capacity' },
-    { Icon: RoomsIcon, value: house.rooms, label: 'Rooms' },
-    { Icon: BathIcon, value: house.bathrooms, label: 'Bathrooms' },
-    { Icon: GarageIcon, value: house.garage, label: 'Garage' },
+    { Icon: CapacityIcon, value: house.capacity, label: 'Capacidad' },
+    { Icon: RoomsIcon, value: house.rooms, label: 'Habitaciones' },
+    { Icon: BathIcon, value: house.bathrooms, label: 'Baños' },
+    { Icon: GarageIcon, value: house.garage, label: 'Garaje' },
   ];
   const pill = variant === 'pills';
   const itemStyle = pill
