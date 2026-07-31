@@ -7,7 +7,7 @@ import Faq from '@/components/Faq';
 import Contact from '@/components/Contact';
 
 export default async function HomePage() {
-  const houses = getHouses();
+  const houses = await getHouses();
 
   // Fetch all folders in parallel — empty folders resolve to [] instantly.
   const allImages = await Promise.all(

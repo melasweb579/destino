@@ -1,6 +1,5 @@
 import './globals.css';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import SiteChrome from '@/components/SiteChrome';
 
 export const metadata = {
   title: 'Destino y Estancias — Casas de autor en México',
@@ -16,9 +15,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <body>
-        <Header />
-        {children}
-        <Footer />
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   );
