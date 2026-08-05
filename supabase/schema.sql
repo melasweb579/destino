@@ -6,6 +6,7 @@ create table if not exists houses (
   name text not null,
   cloudinary_folder text,
   location text,
+  maps_url text,
   capacity integer,
   rooms integer,
   bathrooms integer,

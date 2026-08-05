@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { updateHouse } from '@/lib/houses';
+import { updateHouse, extractMapsSrc } from '@/lib/houses';
 
 export async function updateHouseAction(id, formData) {
   const amenities = String(formData.get('amenities') || '')
@@ -13,6 +13,7 @@ export async function updateHouseAction(id, formData) {
   await updateHouse(id, {
     name: formData.get('name'),
     location: formData.get('location'),
+    mapsUrl: extractMapsSrc(formData.get('mapsUrl')),
     price: Number(formData.get('price')),
     currency: formData.get('currency'),
     capacity: Number(formData.get('capacity')),

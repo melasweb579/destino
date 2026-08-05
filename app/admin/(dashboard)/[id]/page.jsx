@@ -24,8 +24,23 @@ export default async function EditHousePage({ params }) {
           <input name="location" defaultValue={house.location} style={inputStyle} />
         </Field>
 
+        <Field label="Enlace de Google Maps">
+          <input
+            name="mapsUrl"
+            type="text"
+            placeholder='https://www.google.com/maps/embed?pb=... o el <iframe> completo'
+            defaultValue={house.mapsUrl || ''}
+            style={inputStyle}
+          />
+          <small style={{ color: '#6B6357', fontSize: 12.5 }}>
+            En Google Maps: busca el lugar → Compartir → pestaña "Insertar un mapa" → pega aquí el código{' '}
+            <code>&lt;iframe&gt;</code> completo o solo el enlace del <code>src</code>. Un enlace corto
+            (maps.app.goo.gl) no se puede incrustar.
+          </small>
+        </Field>
+
         <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 14 }}>
-          <Field label="Precio">
+          <Field label="Precio por persona / noche">
             <input name="price" type="number" step="0.01" min="0" defaultValue={house.price} required style={inputStyle} />
           </Field>
           <Field label="Moneda">

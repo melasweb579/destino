@@ -2,9 +2,10 @@
 import Link from "next/link";
 import Carousel from "./Carousel";
 import { CheckIcon, WhatsAppIcon } from "./icons";
-import { formatPrice } from "@/lib/houses";
+import { formatPrice, toMapsEmbedSrc } from "@/lib/houses";
 
 export default function HouseDetail({ house }) {
+  const mapsEmbedSrc = toMapsEmbedSrc(house.mapsUrl);
   const stats = [
     ["Capacidad", `${house.capacity} huéspedes`],
     ["Habitaciones", `${house.rooms} Cuartos`],
@@ -154,16 +155,41 @@ export default function HouseDetail({ house }) {
               border: "1px solid var(--line)",
             }}
           >
-            <span
-              style={{
-                fontFamily: "ui-monospace, Menlo, monospace",
-                fontSize: 12.5,
-                letterSpacing: ".1em",
-                color: "rgba(17,24,39,.35)",
-              }}
-            >
-              [ mapa · {house.location} ]
-            </span>
+            {mapsEmbedSrc ? (
+              <iframe
+                src={mapsEmbedSrc}
+                title={`Mapa de ${house.name}`}
+                width="100%"
+                height="100%"
+                style={{ border: 0, display: "block" }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            ) : house.mapsUrl ? (
+              <a
+                href={house.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  fontSize: 13.5,
+                  fontWeight: 600,
+                  color: "var(--accent)",
+                }}
+              >
+                Ver ubicación en Google Maps →
+              </a>
+            ) : (
+              <span
+                style={{
+                  fontFamily: "ui-monospace, Menlo, monospace",
+                  fontSize: 12.5,
+                  letterSpacing: ".1em",
+                  color: "rgba(17,24,39,.35)",
+                }}
+              >
+                [ mapa · {house.location} ]
+              </span>
+            )}
           </div>
         </div>
 
@@ -187,7 +213,7 @@ export default function HouseDetail({ house }) {
                 {formatPrice(house.price)}
               </b>
               <span style={{ fontSize: 14, color: "var(--muted)" }}>
-                / noche
+                / Noche/persona
               </span>
             </div>
             <div

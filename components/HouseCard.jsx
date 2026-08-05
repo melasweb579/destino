@@ -44,7 +44,7 @@ export default function HouseCard({ house, layout = 'overlay' }) {
         <div style={{ marginTop: 'auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, paddingTop: 14, borderTop: '1px solid var(--line)' }}>
           <p style={{ margin: 0, display: 'flex', flexDirection: 'column', lineHeight: 1.1 }}>
             <b className="h-display" style={{ fontSize: '1.25rem' }}>{formatPrice(house.price)}</b>
-            <small style={{ fontSize: 11.5, color: 'var(--muted)' }}>por noche</small>
+            <small style={{ fontSize: 11.5, color: 'var(--muted)' }}>Noche/persona</small>
           </p>
           <Link href={href} style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '11px 18px', borderRadius: 999, background: 'var(--accent)', color: '#ffffff', fontSize: 13.5, fontWeight: 600 }}>
             Ver estancia <span style={{ fontSize: 15 }}>→</span>
