@@ -12,6 +12,7 @@ create table if not exists houses (
   bathrooms integer,
   garage integer,
   price numeric(10, 2) not null,
+  base_persons integer not null default 2,
   currency text not null default 'USD',
   hue integer,
   shots text[] not null default '{}',

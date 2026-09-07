@@ -15,6 +15,7 @@ export async function updateHouseAction(id, formData) {
     location: formData.get('location'),
     mapsUrl: extractMapsSrc(formData.get('mapsUrl')),
     price: Number(formData.get('price')),
+    basePersons: Number(formData.get('basePersons')),
     currency: formData.get('currency'),
     capacity: Number(formData.get('capacity')),
     rooms: Number(formData.get('rooms')),

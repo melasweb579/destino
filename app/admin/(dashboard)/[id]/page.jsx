@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { getHouse } from '@/lib/houses';
+import { getHouse, EXTRA_PERSON_PRICE } from '@/lib/houses';
 import { updateHouseAction } from './actions';
 
 export default async function EditHousePage({ params }) {
@@ -39,14 +39,20 @@ export default async function EditHousePage({ params }) {
           </small>
         </Field>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 14 }}>
-          <Field label="Precio por persona / noche">
+        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: 14 }}>
+          <Field label="Precio base / noche">
             <input name="price" type="number" step="0.01" min="0" defaultValue={house.price} required style={inputStyle} />
+          </Field>
+          <Field label="Personas incluidas">
+            <input name="basePersons" type="number" min="1" defaultValue={house.basePersons} required style={inputStyle} />
           </Field>
           <Field label="Moneda">
             <input name="currency" defaultValue={house.currency} style={inputStyle} />
           </Field>
         </div>
+        <p style={{ margin: '-8px 0 0', fontSize: 12.5, color: '#6B6357' }}>
+          Cada persona adicional a las incluidas suma ${EXTRA_PERSON_PRICE} por noche (regla fija del sitio).
+        </p>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14 }}>
           <Field label="Capacidad">

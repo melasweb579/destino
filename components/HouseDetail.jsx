@@ -1,11 +1,26 @@
 "use client";
+import { useState } from "react";
 import Link from "next/link";
 import Carousel from "./Carousel";
 import { CheckIcon, WhatsAppIcon } from "./icons";
-import { formatPrice, toMapsEmbedSrc } from "@/lib/houses";
+import { formatPrice, toMapsEmbedSrc, calculateTotalPrice, EXTRA_PERSON_PRICE } from "@/lib/houses";
+
+const counterButtonStyle = {
+  width: 30,
+  height: 30,
+  borderRadius: 8,
+  border: "1px solid var(--line)",
+  background: "#fff",
+  fontSize: 17,
+  lineHeight: 1,
+  cursor: "pointer",
+};
 
 export default function HouseDetail({ house }) {
   const mapsEmbedSrc = toMapsEmbedSrc(house.mapsUrl);
+  const [persons, setPersons] = useState(house.basePersons);
+  const totalPrice = calculateTotalPrice(house.price, house.basePersons, persons);
+  const extraPersons = Math.max(0, persons - house.basePersons);
   const stats = [
     ["Capacidad", `${house.capacity} huéspedes`],
     ["Habitaciones", `${house.rooms} Cuartos`],
@@ -210,12 +225,57 @@ export default function HouseDetail({ house }) {
                 className="h-display"
                 style={{ fontWeight: 700, fontSize: "2rem" }}
               >
-                {formatPrice(house.price)}
+                {formatPrice(totalPrice)}
               </b>
               <span style={{ fontSize: 14, color: "var(--muted)" }}>
-                / Noche/persona
+                / noche
               </span>
             </div>
+
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: 12,
+                marginTop: 14,
+                padding: "10px 12px",
+                borderRadius: 10,
+                background: "#f7f4ef",
+              }}
+            >
+              <span style={{ fontSize: 13.5, fontWeight: 600, color: "#374151" }}>
+                Personas
+              </span>
+              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                <button
+                  type="button"
+                  onClick={() => setPersons((p) => Math.max(1, p - 1))}
+                  aria-label="Restar persona"
+                  style={counterButtonStyle}
+                >
+                  −
+                </button>
+                <span style={{ minWidth: 20, textAlign: "center", fontWeight: 600 }}>
+                  {persons}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setPersons((p) => Math.min(house.capacity, p + 1))}
+                  aria-label="Sumar persona"
+                  style={counterButtonStyle}
+                >
+                  +
+                </button>
+              </div>
+            </div>
+            <p style={{ margin: "8px 0 0", fontSize: 12.5, color: "var(--muted)" }}>
+              Incluye {house.basePersons} {house.basePersons === 1 ? "persona" : "personas"}
+              {extraPersons > 0
+                ? ` · +${extraPersons} extra × $${EXTRA_PERSON_PRICE} = ${formatPrice(extraPersons * EXTRA_PERSON_PRICE)}`
+                : ""}
+            </p>
+
             <div
               style={{
                 display: "grid",
